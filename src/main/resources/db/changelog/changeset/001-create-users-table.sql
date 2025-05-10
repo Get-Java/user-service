@@ -1,0 +1,14 @@
+-- liquibase formatted sql
+
+-- changeset aqua:1745077341122-1
+CREATE TABLE users (id UUID NOT NULL, keycloak_id UUID NOT NULL, username VARCHAR(20) NOT NULL, email VARCHAR(50) NOT NULL, first_name VARCHAR(50) NOT NULL, last_name VARCHAR(50) NOT NULL, CONSTRAINT pk_users PRIMARY KEY (id));
+
+-- changeset aqua:1745077341122-2
+ALTER TABLE users ADD CONSTRAINT UC_USERS_EMAIL UNIQUE (email);
+
+-- changeset aqua:1745077341122-3
+ALTER TABLE users ADD CONSTRAINT UC_USERS_KEYCLOAK UNIQUE (keycloak_id);
+
+-- changeset aqua:1745077341122-4
+ALTER TABLE users ADD CONSTRAINT UC_USERS_USERNAME UNIQUE (username);
+

@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:16
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+
+  eureka-server:
+    image: ghcr.io/get-java/eureka-server:latest
+
+  cloud-config-server:
+    image: ghcr.io/get-java/config-server:latest
+
+  api-gateway:
+    image: ghcr.io/get-java/api-gateway:latest
+
+  user-service:
+    image: ghcr.io/get-java/user-service:latest
