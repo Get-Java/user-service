@@ -120,6 +120,7 @@ services:
       - .env
     environment:
       EUREKA_URI: http://eureka-server-dev:8761/eureka
+      KEYCLOAK_URI: http://keycloak-dev:9000
       DB_HOST: postgres-dev
       DB_PORT: 5432
       DB_NAME: ${DB_NAME}
