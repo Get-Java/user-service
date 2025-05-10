@@ -23,17 +23,17 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9000/realms/dev
+          issuer-uri: ${KEYCLOAK_URI}/realms/${keycloak.realm}
   config:
     import: optional:classpath:.env[.properties]
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_URI}
 
 keycloak:
-  auth-server-url: http://localhost:9000
+  auth-server-url: ${KEYCLOAK_URI}
   realm: dev
   resource: user-service
   credentials:

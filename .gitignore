@@ -38,4 +38,4 @@ out/
 
 amplicode.xml
 
-src/main/resources/.env
+**/.env

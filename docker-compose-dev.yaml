@@ -5,7 +5,7 @@ services:
       service: postgres
     container_name: db-dev
     env_file:
-      - src/main/resources/.env
+      - .env
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -76,7 +76,7 @@ services:
       service: cloud-config-server
     container_name: cloud-config-server-dev
     env_file:
-      - src/main/resources/.env
+      - .env
     environment:
       EUREKA_URI: http://eureka-server-dev:8761/eureka
       SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME: aquadevv
@@ -117,7 +117,14 @@ services:
       service: user-service
     container_name: user-service-dev
     env_file:
-      - src/main/resources/.env
+      - .env
+    environment:
+      EUREKA_URI: http://eureka-server-dev:8761/eureka
+      DB_HOST: postgres-dev
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       api-gateway-dev:
         condition: service_healthy
