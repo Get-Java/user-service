@@ -37,6 +37,7 @@ dependencies {
     implementation("org.keycloak:keycloak-admin-client:${property("keycloak-admin-client.version")}")
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
+    implementation("org.springframework.cloud:spring-cloud-bus")
     compileOnly("org.projectlombok:lombok")
     compileOnly("com.diffblue.cover:cover-annotations:${property("diffblue.version")}")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

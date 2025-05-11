@@ -8,3 +8,13 @@ spring:
         service-id: config-server
       fail-fast: true
 
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URI}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,refresh,bus-refresh
