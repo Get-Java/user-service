@@ -1,41 +1,10 @@
-server:
-  port: 8080
-
 spring:
   application:
     name: user-service
-  docker:
-    compose:
-      file: docker-compose-dev.yaml
-  datasource:
-    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: true
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${KEYCLOAK_URI}/realms/${keycloak.realm}
-  config:
-    import: optional:classpath:.env[.properties]
-
-eureka:
-  client:
-    service-url:
-      defaultZone: ${EUREKA_URI}
-
-keycloak:
-  auth-server-url: ${KEYCLOAK_URI}
-  realm: dev
-  resource: user-service
-  credentials:
-    secret: ${KEYCLOAK_USER_SERVICE_SECRET}
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      fail-fast: true
 

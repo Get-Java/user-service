@@ -36,6 +36,7 @@ dependencies {
     implementation("org.mapstruct:mapstruct:${property("mapstruct.version")}")
     implementation("org.keycloak:keycloak-admin-client:${property("keycloak-admin-client.version")}")
     implementation("org.liquibase:liquibase-core")
+    implementation("org.springframework.cloud:spring-cloud-starter-config")
     compileOnly("org.projectlombok:lombok")
     compileOnly("com.diffblue.cover:cover-annotations:${property("diffblue.version")}")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -49,6 +50,7 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
+
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion")

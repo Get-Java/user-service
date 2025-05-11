@@ -97,7 +97,7 @@ services:
     container_name: api-gateway-dev
     environment:
       EUREKA_URI: http://eureka-server-dev:8761/eureka
-      KEYCLOAK_ISSUER_URI: http://keycloak-dev:9000/realms/dev
+      KEYCLOAK_ISSUER_URI: http://keycloak-dev:8080/realms/dev
     depends_on:
       eureka-server-dev:
         condition: service_healthy
@@ -120,7 +120,8 @@ services:
       - .env
     environment:
       EUREKA_URI: http://eureka-server-dev:8761/eureka
-      KEYCLOAK_URI: http://keycloak-dev:9000
+      KEYCLOAK_URI: http://keycloak-dev:8080
+      KEYCLOAK_USER_SERVICE_SECRET: ${KEYCLOAK_USER_SERVICE_SECRET}
       DB_HOST: postgres-dev
       DB_PORT: 5432
       DB_NAME: ${DB_NAME}
