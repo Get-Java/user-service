@@ -5,6 +5,9 @@ spring:
   config:
     import: "configserver:"
 
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+
   cloud:
     config:
       discovery:
