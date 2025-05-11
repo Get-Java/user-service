@@ -37,7 +37,9 @@ dependencies {
     implementation("org.keycloak:keycloak-admin-client:${property("keycloak-admin-client.version")}")
     implementation("org.liquibase:liquibase-core")
     implementation("org.springframework.cloud:spring-cloud-starter-config")
-    implementation("org.springframework.cloud:spring-cloud-bus")
+    implementation("org.springframework.cloud:spring-cloud-starter-bus-kafka")
+    implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
     compileOnly("org.projectlombok:lombok")
     compileOnly("com.diffblue.cover:cover-annotations:${property("diffblue.version")}")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -48,6 +50,7 @@ dependencies {
     testImplementation("com.diffblue.cover:cover-annotations:${property("diffblue.version")}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.springframework.kafka:spring-kafka-test")
     testImplementation("io.projectreactor:reactor-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
