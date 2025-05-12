@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -33,13 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse register(RegisterRequest registerRequest) {
-        UserRepresentation user = new UserRepresentation();
-        user.setUsername(registerRequest.getUsername());
-        user.setEmail(registerRequest.getEmail());
-        user.setFirstName(registerRequest.getFirstName());
-        user.setLastName(registerRequest.getLastName());
-        user.setEnabled(true);
-        user.setEmailVerified(true);
+        UserRepresentation user = getUserRepresentation(registerRequest);
 
         Response response = keycloak.realm(realm)
                 .users()
@@ -52,21 +47,31 @@ public class UserServiceImpl implements UserService {
         }
 
         String userId = extractId(response);
-        CredentialRepresentation password = new CredentialRepresentation();
-        password.setType(CredentialRepresentation.PASSWORD);
-        password.setValue(registerRequest.getPassword());
-        password.setTemporary(false);
-
-        keycloak.realm(realm)
-                .users()
-                .get(userId)
-                .resetPassword(password);
 
         User userEntity = userMapper.toEntity(registerRequest);
         userEntity.setKeycloakId(UUID.fromString(userId));
         userEntity = userRepository.save(userEntity);
 
         return userMapper.toUserResponse(userEntity);
+    }
+
+    private static UserRepresentation getUserRepresentation(RegisterRequest registerRequest) {
+        UserRepresentation user = new UserRepresentation();
+
+        CredentialRepresentation password = new CredentialRepresentation();
+        password.setType(CredentialRepresentation.PASSWORD);
+        password.setValue(registerRequest.getPassword());
+        password.setTemporary(false);
+
+        user.setUsername(registerRequest.getUsername());
+        user.setEmail(registerRequest.getEmail());
+        user.setFirstName(registerRequest.getFirstName());
+        user.setLastName(registerRequest.getLastName());
+        user.setRealmRoles(List.of("CLIENT"));
+        user.setCredentials(List.of(password));
+        user.setEnabled(true);
+        user.setEmailVerified(true);
+        return user;
     }
 
     @Override
