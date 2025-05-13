@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 
         User userEntity = userMapper.toEntity(registerRequest);
         userEntity.setKeycloakId(UUID.fromString(userId));
+        System.exit(1);
         userEntity = userRepository.save(userEntity);
 
         return userMapper.toUserResponse(userEntity);
